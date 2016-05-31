@@ -33,7 +33,7 @@ def moonphase_to_values(argument):
 
 def randompitch():
     
-    pitcher = randint(0,12)
+    pitcher = randint(0,3)
     return pitcher
         
     
@@ -80,7 +80,7 @@ MyMIDI.addProgramChange(track1,0, time, 1)    # voice 1 = 86   fretless bass
 #time = time +1
 MyMIDI.addProgramChange(track2,1, time, 112)    # voice 2 = 53
 time = time +1
-MyMIDI.addProgramChange(track3,2, time, 9)   # cymbal = 119
+MyMIDI.addProgramChange(track3,2, time, 73)   # cymbal = 119
 
 time = time +1
 
@@ -107,10 +107,10 @@ for row in csv.reader(f):
    # MyMIDI.addNote(track2,channel2,pitch2,time,duration,volume)
    # time = time + 1
     if row[precipitation] != "0.00":  #got some rain today
-        pitch3 = 73 + randompitch()
+        pitch3 = 64 + randompitch()
         MyMIDI.addNote(track3,channel3,pitch3,time,1,100) 
-        pitch3 = pitch3 + 1
-        MyMIDI.addNote(track3,channel3,pitch3,time,3,100)        
+       # pitch3 = pitch3 + 1
+       # MyMIDI.addNote(track3,channel3,pitch3,time,3,100)        
     #print(row[1])
 
 
@@ -118,9 +118,9 @@ time = time + 4
 
 # change track 3 to ocean sound for the finale !!
 
-MyMIDI.addProgramChange(track3,2, time, 122)   # 122 = Seashore
-time = time + 1
-MyMIDI.addNote(track3,channel3,40,time,45,100) # let it ring....
+#MyMIDI.addProgramChange(track3,2, time, 122)   # 122 = Seashore
+#time = time + 1
+#MyMIDI.addNote(track3,channel3,40,time,45,100) # let it ring....
 
 
 # And write it to disk.
