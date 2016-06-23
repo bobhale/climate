@@ -20,14 +20,14 @@ def winddirection_to_values(argument):
     
 def moonphase_to_values(argument):
     switcher = {
-        "1": 43,
-        "1.5": 45,
-        "2": 46,
-        "2.5": 50,
-        "3": 52,
-        "3.5": 50,
-        "4": 46,
-        "4.5":45
+        "1": 31,
+       # "1.5": 45,
+        "2": 38,
+      #  "2.5": 50,
+         "3": 43,
+      #  "3.5": 50,
+        "4": 38,
+      #  "4.5":45
     }
     return switcher.get(argument, 0)    
 
@@ -47,7 +47,7 @@ track2 = 1
 track3 = 2
 time = 0
 
-beats = 1250cd cd
+beats = 400
 
 # indexes to elements of data row
 windDirection = 7
@@ -76,11 +76,11 @@ MyMIDI.addTempo(track3,time, beats)
 # set voice (sound) to be played on tracks
 #  we used General Midi sounds ( see General Midi docs )
 time = time +1
-MyMIDI.addProgramChange(track1,0, time, 1)    # voice 1 = 86   fretless bass
+MyMIDI.addProgramChange(track1,0, time, 47)    # voice 1 = 86   fretless bass
 #time = time +1
 MyMIDI.addProgramChange(track2,1, time, 112)    # voice 2 = 53
 time = time +1
-MyMIDI.addProgramChange(track3,2, time, 73)   # cymbal = 119
+MyMIDI.addProgramChange(track3,2, time, 77)   # cymbal = 119
 
 time = time +1
 
@@ -95,8 +95,8 @@ for row in csv.reader(f):
     #pitch2Tmp = float(row[windSpeed]) 
    # pitch2 = int(pitch2Tmp) + lowTempAdjustment
     duration = 1.5
-    durationlong = 2.0
-    volume = 100  
+    durationlong = 2.5
+    volume = 80  
     
     # add initial tracks
     # Add a note. addNote expects the following information:
@@ -108,7 +108,9 @@ for row in csv.reader(f):
    # time = time + 1
     if row[precipitation] != "0.00":  #got some rain today
         pitch3 = 64 + randompitch()
+        pitch4 = pitch3 + 4
         MyMIDI.addNote(track3,channel3,pitch3,time,1,100) 
+        MyMIDI.addNote(track3,channel3,pitch4,time,1,100) 
        # pitch3 = pitch3 + 1
        # MyMIDI.addNote(track3,channel3,pitch3,time,3,100)        
     #print(row[1])
@@ -124,7 +126,7 @@ time = time + 4
 
 
 # And write it to disk.
-binfile = open("2015MSPMoonPrecip.mid", 'wb')
+binfile = open("2015MSPMoonPrecip_HAVANA.mid", 'wb')
 MyMIDI.writeFile(binfile)
 binfile.close()
 
